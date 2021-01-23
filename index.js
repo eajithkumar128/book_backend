@@ -2,7 +2,7 @@ var express = require("express");
 var app = express();
 var cors = require("cors");
 const bodyParser = require("body-parser");
-require("dotenv").config();
+require("dotenv").config({ path: __dirname + "/.env" });
 const Instamojo = require("instamojo-payment-nodejs");
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -11,7 +11,7 @@ app.use(cors());
 
 app.post("/paymentGateway", async (req, res) => {
   Instamojo.setKeys(process.env.API_KEY, process.env.API_AUTH);
-
+  console.log(process.env.API_KEY);
   let data = {};
   Instamojo.isSandboxMode(true);
 
