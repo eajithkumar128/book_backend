@@ -27,7 +27,12 @@ app.post("/paymentGateway", async (req, res) => {
   data.allow_repeated_payments = false;
 
   const paymentData = Instamojo.PaymentData(data);
-  const response = await Instamojo.createNewPaymentRequest(paymentData);
+  try {
+    const response = await Instamojo.createNewPaymentRequest(paymentData);
+  } catch (e) {
+    console.log(e);
+  }
+
   const redirectUrl = response.payment_request.longurl;
   res.status(200).json(redirectUrl);
 });
