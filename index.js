@@ -29,6 +29,7 @@ app.post("/paymentGateway", async (req, res) => {
   const paymentData = Instamojo.PaymentData(data);
   try {
     const response = await Instamojo.createNewPaymentRequest(paymentData);
+    console.log(response);
     const redirectUrl = response.payment_request.longurl;
     res.status(200).json(redirectUrl);
   } catch (e) {
